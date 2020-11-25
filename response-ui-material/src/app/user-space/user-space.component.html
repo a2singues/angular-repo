@@ -1,0 +1,168 @@
+  
+  <!--div style="width:100%; text-align:center; background:orange" >
+    <h1>
+      {{ title }}
+    </h1>
+  -->
+    <!-- div style="position: absolute; right: 10%; top:5%;" *ngIf="showCurrentUser" -->
+      <!--a href="#" (click)="onClickAction(); actionSelect.open()">
+        <img src="../../assets/images/male.ico" alt="Utilisateur"/><span style="color:green;font-style: italic;">  {{ loggedUser.email }}</span>
+      </a -->
+      <!-- -------------
+      <button (click)="onClickAction(); actionSelect.open()"><img src="../../assets/images/male.ico" alt="Utilisateur"/><span style="color:green;font-style: italic;">  {{ loggedUser.email }}</span></button>
+       <mat-select style="width:120px; position: relative;  right: 56%; top: 20px; visibility: hidden;" 
+       [disableOptionCentering]="true" #actionSelect (selectionChange)="onChange($event.value)" (onBlur)="onChange($event.value)">
+       <mat-option *ngFor="let action of actionsList" [value]="action">  {{ action }}</mat-option>
+      </mat-select>
+    ------------------------------->
+    <!--/div -->
+  <!--/div -->
+<!--
+  <mat-toolbar color="primary">
+     <mat-toolbar-row>
+       <a mat-button routerLink="/home">Accueil</a>
+       <span class="spacer" style="width: 30%;"></span>
+       <span style="color:red;">Espace utilisateur</span>
+    </mat-toolbar-row>
+  </mat-toolbar>
+-->
+<!--
+  <mat-card-title>
+      <div style='width: 100%; color: blue; background:orange'>Espace utilisateur</div>
+  </mat-card-title>
+-->
+ <div style="position: absolute; right: 5%; top: 16%;">
+    <button mat-raised-button id="buttonMyProfile" (click)="openMyProfile()" color="primary">Mon profil</button>
+ </div>
+
+<div style="position: absolute; width: 100%; height: 96%;">
+  <div style="position: absolute; left:78%; height: 70%; color:#000; background: #eee;" *ngIf="showUsersList">
+      <!--mat-select [disableOptionCentering]="true" #actionSelect (selectionChange)="onChangeUser($event.value)" -->
+          <div *ngFor="let user of selectedUsers; let i = index">
+                 <div [ngClass]="{'bgGrey': (i % 2) == 0, 'bgNone':(i % 2) == 1}" style="height: 50px; cursor: pointer;" 
+                    (click)="onSelectUser(user);">
+                <img src="../../assets/images/male.ico" alt="Utilisateur"/>
+                {{ user.lastName}}, {{ user.id }}
+              </div>
+          </div>
+     <!--/mat-select -->
+  </div>
+
+  <div *ngIf="selectedUser" style="position: absolute; left:1%; top:2%; width: 75%;height: 95%; border: 1px solid #ddd; padding-left: 5px;">
+      <p> 
+          <span  style="font-weight: bold;">
+              <img src="../../assets/images/male.ico" alt="Utilisateur"/>
+              {{selectedUser.lastName}}
+              <button style="margin-left: 20px; margin-right: 20px;" mat-raised-button (click)="uploadNewFile()" color="primary">Ajouter une photo</button>
+              <!--
+              <div class="container" style="position:absolute; top:3%; left:25%; background: #66b; color: white; width:40%;">
+                  <input type="file" name="file" ng2FileSelect [uploader]="uploader" />
+                  <button type="button" class="btn btn-success btn-s" 
+                    (click)="uploader.uploadAll()" 
+                    [disabled]="!uploader.getNotUploadedItems().length" >
+                        Upload
+                  </button>
+                </div>
+              -->
+              <!-- FILE UPLOAD 
+              <div class="container">
+                <div class="row">
+                    <div class="col-md-6 offset-md-3">
+                        <h3>Choisir un fichier</h3>            
+                        <div class="form-group">
+                            <input type="file" name="image" (change)="fileProgress($event)" />
+                        </div>
+                        <div *ngIf="fileUploadProgress">
+                            Téléchargement en cours: {{ fileUploadProgress }}
+                        </div>
+                        <div class="image-preview mb-3" *ngIf="previewUrl">
+                            <img [src]="previewUrl" height="300" />                 
+                        </div>
+             
+                        <div class="mb-3" *ngIf="uploadedFilePath">
+                            {{uploadedFilePath}}
+                        </div>
+                         
+                        <div class="form-group">
+                            <button class="btn btn-primary"  (click)="onSubmit()">Télécharger</button>
+                        </div>
+                    </div>
+                </div>
+            </div>  
+            -->   
+            
+            <!--div *ngIf="showPhotoUpload" style="background: #66b; color: white; margin-top: 20px; height: 300px;" -->
+            <div *ngIf="showPhotoUpload" style="background: #BDB76B; color: white; margin-top: 20px; height: 300px;">
+              <div *ngIf="currentFile" class="progress" style="position:absolute; left:80%; top:12%;">
+                <div class="progress-bar progress-bar-info progress-bar-striped" role="progressbar"
+                  attr.aria-valuenow="{{ progress }}" aria-valuemin="0" aria-valuemax="100" [ngStyle]="{ width: progress + '%' }">
+                  {{ progress }}%
+                </div>
+              </div>
+            
+              <label class="btn btn-default">
+                <input type="file" (change)="selectFile($event)" />
+              </label>
+            
+              <button class="btn btn-success" [disabled]="!selectedFiles" (click)="upload()">
+                Télécharger
+              </button>
+            
+              <div class="alert alert-light" role="alert">{{ message }}</div>
+            
+              <div class="card">
+                <!--div class="card-header">Vos photos</div -->
+                <!--
+                <ul class="list-group list-group-flush" *ngFor="let file of fileInfos | async">
+                  <li class="list-group-item">
+                    <a href="{{ file.url }}">{{ file.url }}/{{ file.name }}</a>
+                  </li>
+                  <img src="{{ file.url }}" alt="test" width="48"/>
+                </ul>
+                -->
+                <table style="position:relative; left:1%; width: 98%; ">
+                    <caption style="font-weight: bold;">Vos photos</caption>
+                  <tr style="background: #bbb;">
+                    <th>Photo</th>
+                    <th>Label</th>
+                    <th>Défaut</th>
+                    <th>Supprimer</th>
+                  </tr>
+                  <!--tr class="list-group list-group-flush" *ngFor="let file of userPhotos | async" -->
+                  <tr class="list-group list-group-flush" *ngFor="let photo of userPhotos; let k = index"
+                      [ngClass]="{'bgGrey': (k % 2) == 0, 'bgNone':(k % 2) == 1}">
+                    <td><img src="{{ photo.url }}" alt="test" width="48"/></td>
+                    <td>{{ photo.name }}</td>
+                    <td><input type="radio" name="myphoto" value="{{ photo.name }}" id="{{ photo.name }}" (click)="selectedPhoto(photo)" /></td>
+                    <td><input type="checkbox" name="{{ photo.name }}" id="{{ photo.name }}" (click)="photoToRemove(photo)" /></td>
+                  </tr>
+                </table>
+              </div>
+              <span>
+                <button style="font-size: 12px; margin-top: 20px" mat-raised-button (click)="selectionImage()" color="primary">Sélectionner</button>
+                <button style="font-size: 12px; margin-left: 2%; margin-top: 20px" mat-raised-button (click)="supprimerImages()" color="primary">Supprimer</button>
+                <button style="font-size: 12px; margin-left: 69%; margin-top: 20px" mat-raised-button (click)="closeUploadNewFile()" color="primary">Fermer</button>
+              </span>
+            </div>
+
+            </span>
+        </p>
+
+        <div *ngIf="! showPhotoUpload">
+          <p class="dataHeader">Identité</p>
+          <p>Nom:  <span class="dataValue">{{selectedUser.lastName}}</span></p>
+          <p>Prénom:  <span class="dataValue">{{selectedUser.fName}}</span></p>
+          <p>Civilité:  <span class="dataValue">{{genderList[selectedUser.gender]}}</span></p>
+          <p>Date de naissance:  <span class="dataValue">{{selectedUser.birthDate}}</span></p>
+          <p class="dataHeader">Coordonnées</p>
+          <p>Adresse:  <span class="dataValue">{{selectedUser.address}}</span></p>
+          <p>Adresse mail:  <span class="dataValue">{{selectedUser.email}}</span></p>
+          <button mat-raised-button (click)="closeSelectedUser()" color="primary">Fermer</button>
+        </div>
+    </div>
+
+</div>
+
+<router-outlet></router-outlet>
+
+

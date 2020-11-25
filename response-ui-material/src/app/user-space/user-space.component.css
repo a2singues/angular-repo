@@ -1,0 +1,34 @@
+.bgGrey {
+    background: #eee;
+}
+
+.bgNone {
+    background: #fff;
+    border: 0.5px;
+}
+
+.dataHeader {
+    width: 100%; 
+    background: #eee; 
+    color: #66b;
+    font-weight: bold;
+}
+
+.dataValue {
+    color: #66b;
+    /*font-style: italic; */
+}
+
+table
+{
+border-collapse: collapse;
+font-family: Verdana, Geneva, Tahoma, sans-serif;
+font-style: normal;
+font-weight: normal;
+color: black;
+}
+td, th /* Mettre une bordure sur les td ET les th */
+{
+border: 1px solid white;
+font-size: 12px;
+}
